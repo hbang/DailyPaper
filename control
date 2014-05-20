@@ -1,0 +1,9 @@
+Package: ws.hbang.dailypaper
+Name: DailyPaper
+Depends: mobilesubstrate, ws.hbang.common (>= 1.1)
+Version: 1.0~beta1
+Architecture: iphoneos-arm
+Description: Daily wallpapers courtesy of Bing
+Maintainer: HASHBANG Productions <support@hbang.ws>
+Author: HASHBANG Productions <support@hbang.ws>
+Section: Tweaks

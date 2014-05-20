@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = DailyPaper;
+		cell = PSLinkCell;
+		detail = HBDPRootListController;
+		icon = icon.png;
+		isController = 1;
+		label = DailyPaper;
+	};
+}

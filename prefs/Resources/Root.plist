@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Wallpaper downloads will be delayed until you’re next connected to Wi-Fi.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>ws.hbang.dailypaper</string>
+			<key>key</key>
+			<string>Enabled</string>
+			<key>label</key>
+			<string>Enabled</string>
+			<key>PostNotification</key>
+			<string>ws.hbang.dailypaper/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>ws.hbang.dailypaper</string>
+			<key>key</key>
+			<string>WiFiOnly</string>
+			<key>label</key>
+			<string>Wi-Fi Only</string>
+			<key>PostNotification</key>
+			<string>ws.hbang.dailypaper/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>High quality (Retina display) wallpapers are a larger download – especially on iPad.</string>
+			<key>requiredCapabilities</key>
+			<array>
+				<string>hidpi</string>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>ws.hbang.dailypaper</string>
+			<key>key</key>
+			<string>Retina</string>
+			<key>label</key>
+			<string>High Quality</string>
+			<key>requiredCapabilities</key>
+			<array>
+				<string>hidpi</string>
+				<array>
+					<string>ipad</string>
+					<false/>
+				</array>
+			</array>
+			<key>PostNotification</key>
+			<string>ws.hbang.dailypaper/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>ws.hbang.dailypaper</string>
+			<key>key</key>
+			<string>Retina</string>
+			<key>label</key>
+			<string>High Quality</string>
+			<key>requiredCapabilities</key>
+			<array>
+				<string>hidpi</string>
+				<string>ipad</string>
+			</array>
+			<key>PostNotification</key>
+			<string>ws.hbang.dailypaper/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerCellClass</key>
+			<string>PSFooterHyperlinkView</string>
+			<key>footerHyperlinkRange</key>
+			<string>{81, 19}</string>
+			<key>headerFooterHyperlinkButtonTitle</key>
+			<string>You can view a full history of Bing wallpapers on istartedsomething’s unofficial Bing Image Archive.
+DailyPaper downloads a new wallpaper from Bing every day at midnight in the region’s timezone.</string>
+			<key>headerFooterHyperlinkButtonURL</key>
+			<string>http://www.istartedsomething.com/bingimages</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>ws.hbang.dailypaper</string>
+			<key>detail</key>
+			<string>HBListItemsController</string>
+			<key>key</key>
+			<string>WallpaperMode</string>
+			<key>label</key>
+			<string>Apply To</string>
+			<key>shortTitles</key>
+			<array>
+				<string>Home &amp; Lock Screen</string>
+				<string>Home Screen</string>
+				<string>Lock Screen</string>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>Both</string>
+				<string>Home Screen</string>
+				<string>Lock Screen</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
+			<key>PostNotification</key>
+			<string>ws.hbang.dailypaper/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>ws.hbang.dailypaper</string>
+			<key>detail</key>
+			<string>HBListItemsController</string>
+			<key>key</key>
+			<string>Region</string>
+			<key>label</key>
+			<string>Region</string>
+			<key>validTitles</key>
+			<array>
+				<string>Worldwide</string>
+				<string>Australia</string>
+				<string>Canada</string>
+				<string>China</string>
+				<string>France</string>
+				<string>Germany</string>
+				<string>Japan</string>
+				<string>New Zealand</string>
+				<string>United Kingdom</string>
+				<string>United States</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+				<integer>6</integer>
+				<integer>7</integer>
+				<integer>8</integer>
+				<integer>9</integer>
+			</array>
+			<key>PostNotification</key>
+			<string>ws.hbang.dailypaper/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>forceUpdate:</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>HBDPSpinnerTableCell</string>
+			<key>id</key>
+			<string>UpdateNow</string>
+			<key>label</key>
+			<string>Update Now</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>detail</key>
+			<string>HBDPAboutListController</string>
+			<key>isController</key>
+			<true/>
+			<key>label</key>
+			<string>About</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>DailyPaper</string>
+</dict>
+</plist>
