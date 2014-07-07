@@ -6,6 +6,7 @@
 #import <PhotoLibrary/PLStaticWallpaperImageViewController.h>
 #import <SpringBoard/SpringBoard.h>
 #import <SpringBoard/SBWiFiManager.h>
+#import <SpringBoardFoundation/SBFWallpaperParallaxSettings.h>
 
 typedef NS_ENUM(NSUInteger, HBDPBingRegion) {
 	HBDPBingRegionWorldwide,
@@ -150,11 +151,11 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		isRunning = YES;
 
-		CGSize screenSize = [UIScreen mainScreen].bounds.size;
+		CGSize screenSize = [SBFWallpaperParallaxSettings minimumWallpaperSizeForCurrentDevice];
 
-		if (!useRetina && [UIScreen mainScreen].scale > 1.f) {
-			screenSize.width /= [UIScreen mainScreen].scale;
-			screenSize.height /= [UIScreen mainScreen].scale;
+		if (useRetina && [UIScreen mainScreen].scale > 1.f) {
+			screenSize.width *= [UIScreen mainScreen].scale;
+			screenSize.height *= [UIScreen mainScreen].scale;
 		}
 
 		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.bing.com/ImageResolution.aspx?w=%li&h=%li&mkt=%@", (long)screenSize.width, (long)screenSize.height, HBDPBingRegionToMarket(region)]];
