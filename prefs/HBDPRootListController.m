@@ -39,7 +39,7 @@ static NSString *const kHBDPUpdateNowIdentifier = @"UpdateNow";
 #pragma mark - Callbacks
 
 - (void)forceUpdate:(PSSpecifier *)sender {
-	notify_post("ws.hbang.dailypaper/ForceUpdate");
+	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("ws.hbang.dailypaper/ForceUpdate"), NULL, NULL, YES);
 
 	PSTableCell *cell = (PSTableCell *)[self.view cellForRowAtIndexPath:[self indexPathForSpecifier:sender]];
 	cell.cellEnabled = NO;
