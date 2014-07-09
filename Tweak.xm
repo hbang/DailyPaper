@@ -8,19 +8,6 @@
 #import <SpringBoard/SBWiFiManager.h>
 #import <SpringBoardFoundation/SBFWallpaperParallaxSettings.h>
 
-typedef NS_ENUM(NSUInteger, HBDPBingRegion) {
-	HBDPBingRegionWorldwide,
-	HBDPBingRegionAustralia,
-	HBDPBingRegionCanada,
-	HBDPBingRegionChina,
-	HBDPBingRegionFrance,
-	HBDPBingRegionGermany,
-	HBDPBingRegionJapan,
-	HBDPBingRegionNewZealand,
-	HBDPBingRegionUnitedKingdom,
-	HBDPBingRegionUnitedStates
-};
-
 static NSString *const HBDPErrorDomain = @"HBDPErrorDomain";
 
 BOOL enabled, useRetina, useWiFiOnly;
@@ -35,87 +22,6 @@ BOOL isRunning, isWaitingForWiFi, isFirstRun;
 - (void)_dailypaper_updateWallpaper;
 
 @end
-
-#pragma mark - Region to market/timezone
-
-NSString *HBDPBingRegionToMarket(HBDPBingRegion region) {
-	switch (region) {
-		case HBDPBingRegionWorldwide:
-		default:
-			return @"en-ww";
-			break;
-
-		case HBDPBingRegionAustralia:
-			return @"en-au";
-			break;
-
-		case HBDPBingRegionCanada:
-			return @"en-ca";
-			break;
-
-		case HBDPBingRegionChina:
-			return @"zh-cn";
-			break;
-
-		case HBDPBingRegionFrance:
-			return @"fr-fr";
-			break;
-
-		case HBDPBingRegionGermany:
-			return @"de-de";
-			break;
-
-		case HBDPBingRegionJapan:
-			return @"ja-jp";
-			break;
-
-		case HBDPBingRegionUnitedKingdom:
-			return @"en-gb";
-			break;
-
-		case HBDPBingRegionUnitedStates:
-			return @"en-us";
-			break;
-	}
-}
-
-NSTimeZone *HBDPBingRegionToTimezone(HBDPBingRegion region) {
-	switch (region) {
-		case HBDPBingRegionWorldwide:
-		case HBDPBingRegionUnitedStates:
-		default:
-			return [NSTimeZone timeZoneWithName:@"America/Los_Angeles"];
-			break;
-
-		case HBDPBingRegionAustralia:
-			return [NSTimeZone timeZoneWithName:@"Australia/Sydney"];
-			break;
-
-		case HBDPBingRegionCanada:
-			return [NSTimeZone timeZoneWithName:@"Canada/Eastern"];
-			break;
-
-		case HBDPBingRegionChina:
-			return [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
-			break;
-
-		case HBDPBingRegionFrance:
-			return [NSTimeZone timeZoneWithName:@"Europe/Paris"];
-			break;
-
-		case HBDPBingRegionGermany:
-			return [NSTimeZone timeZoneWithName:@"Europe/Berlin"];
-			break;
-
-		case HBDPBingRegionJapan:
-			return [NSTimeZone timeZoneWithName:@"Asia/Tokyo"];
-			break;
-
-		case HBDPBingRegionUnitedKingdom:
-			return [NSTimeZone timeZoneWithName:@"Europe/London"];
-			break;
-	}
-}
 
 void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 	if (isRunning) {
@@ -274,14 +180,6 @@ void HBDPUpdateWallpaperOnDemand() {
 %end
 
 #pragma mark - Preferences
-
-static NSString *const kHBDPPrefsPath = @"/var/mobile/Library/Preferences/ws.hbang.dailypaper.plist";
-
-static NSString *const kHBDPEnabledKey = @"Enabled";
-static NSString *const kHBDPUseWiFiOnlyKey = @"WiFiOnly";
-static NSString *const kHBDPUseRetinaKey = @"Retina";
-static NSString *const kHBDPRegionKey = @"Region";
-static NSString *const kHBDPWallpaperModeKey = @"WallpaperMode";
 
 void HBDPLoadPrefs() {
 	NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:kHBDPPrefsPath];

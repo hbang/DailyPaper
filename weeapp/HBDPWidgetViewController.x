@@ -6,6 +6,8 @@
 
 static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.f;
 
+HBDPBingRegion region;
+
 @implementation HBDPWidgetViewController {
 	UIButton *_copyrightButton;
 	NSURL *_copyrightURL;
@@ -59,7 +61,7 @@ static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.f;
 		_isLoading = YES;
 
 		HBDPXMLParserHell *parser = [[HBDPXMLParserHell alloc] init];
-		[parser loadWithBingMarket:@"en-au" completion:^(NSString *copyright, NSURL *url, NSError *error) { // TODO: this
+		[parser loadWithBingMarket:HBDPBingRegionToMarket(region) completion:^(NSString *copyright, NSURL *url, NSError *error) {
 			[_copyrightURL release];
 			[parser release];
 
@@ -103,3 +105,17 @@ static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.f;
 }
 
 @end
+
+#pragma mark - Preferences
+
+void HBDPLoadPrefs() {
+	NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:kHBDPPrefsPath];
+	region = GET_INT(kHBDPRegionKey, HBDPBingRegionWorldwide);
+}
+
+%ctor {
+	%init;
+	HBDPLoadPrefs();
+
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)HBDPLoadPrefs, CFSTR("ws.hbang.dailypaper/ReloadPrefs"), NULL, kNilOptions);
+}

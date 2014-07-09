@@ -1,7 +1,7 @@
 include theos/makefiles/common.mk
 
 TWEAK_NAME = DailyPaper
-DailyPaper_FILES = Tweak.xm NCHax.x
+DailyPaper_FILES = Global.m Tweak.xm NCHax.x
 DailyPaper_FRAMEWORKS = UIKit
 DailyPaper_PRIVATE_FRAMEWORKS = PersistentConnection PhotoLibrary SpringBoardFoundation
 
