@@ -8,7 +8,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>Wallpaper downloads will be delayed until you’re next connected to Wi-Fi.</string>
+			<string>The Current Wallpaper widget can be toggled in the Notification Center settings.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -23,6 +23,12 @@
 			<string>Enabled</string>
 			<key>PostNotification</key>
 			<string>ws.hbang.dailypaper/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Wallpaper downloads will be delayed until you’re next connected to Wi-Fi.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -42,10 +48,14 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>High quality (Retina display) wallpapers are a larger download – especially on iPad.</string>
+			<string>High quality (Retina display) wallpapers are a larger download.</string>
 			<key>requiredCapabilities</key>
 			<array>
 				<string>hidpi</string>
+				<dict>
+					<key>ipad</key>
+					<false/>
+				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -62,21 +72,32 @@
 			<key>requiredCapabilities</key>
 			<array>
 				<string>hidpi</string>
-				<array>
-					<string>ipad</string>
+				<dict>
+					<key>ipad</key>
 					<false/>
-				</array>
+				</dict>
 			</array>
 			<key>PostNotification</key>
 			<string>ws.hbang.dailypaper/ReloadPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Bing does not provide wallpapers in Retina iPad quality.</string>
+			<key>requiredCapabilities</key>
+			<array>
+				<string>hidpi</string>
+				<string>ipad</string>
+			</array>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
 			<key>defaults</key>
 			<string>ws.hbang.dailypaper</string>
+			<key>enabled</key>
+			<false/>
 			<key>key</key>
 			<string>Retina</string>
 			<key>label</key>
