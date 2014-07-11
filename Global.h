@@ -14,17 +14,21 @@ typedef NS_ENUM(NSUInteger, HBDPBingRegion) {
 };
 
 static NSString *const HBDPWallpaperDidUpdateNotification = @"HBDPWallpaperDidUpdateNotification";
-static NSString *const HBDPWeeAppNeedsInformationNotification = @"HBDPWallpaperDidUpdateNotification";
+static NSString *const HBDPWallpaperMetadataDidUpdateNotification = @"HBDPWallpaperMetadataDidUpdateNotification";
 
 static NSString *const kHBDPErrorKey = @"error";
 
 static NSString *const kHBDPPrefsPath = @"/var/mobile/Library/Preferences/ws.hbang.dailypaper.plist";
+static NSString *const kHBDPMetadataPath = @"/var/mobile/Library/Caches/ws.hbang.dailypaper.plist";
 
 static NSString *const kHBDPEnabledKey = @"Enabled";
 static NSString *const kHBDPUseWiFiOnlyKey = @"WiFiOnly";
 static NSString *const kHBDPUseRetinaKey = @"Retina";
 static NSString *const kHBDPRegionKey = @"Region";
 static NSString *const kHBDPWallpaperModeKey = @"WallpaperMode";
+
+static NSString *const kHBDPDescriptionKey = @"Description";
+static NSString *const kHBDPURLKey = @"URL";
 
 #ifndef DAILYPAPER_GLOBAL_M
 __BEGIN_DECLS

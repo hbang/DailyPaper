@@ -1,4 +1,5 @@
 #import "Global.h"
+#import "HBDPXMLParserHell.h"
 #include <substrate.h> // what.
 #include <notify.h>
 #import <Foundation/NSDistributedNotificationCenter.h>
@@ -9,6 +10,8 @@
 #import <SpringBoardFoundation/SBFWallpaperParallaxSettings.h>
 
 static NSString *const HBDPErrorDomain = @"HBDPErrorDomain";
+
+void HBDPUpdateWallpaperMetadata();
 
 BOOL enabled, useRetina, useWiFiOnly;
 HBDPBingRegion region;
@@ -86,6 +89,8 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 
 		completion(nil);
 	});
+
+	HBDPUpdateWallpaperMetadata();
 }
 
 void HBDPUpdateWallpaperOnDemand() {
@@ -94,6 +99,22 @@ void HBDPUpdateWallpaperOnDemand() {
 
 		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:HBDPWallpaperDidUpdateNotification object:nil userInfo:error ? @{ kHBDPErrorKey: error.localizedDescription } : nil];
 	}, YES);
+}
+
+void HBDPUpdateWallpaperMetadata() {
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+		HBDPXMLParserHell *parser = [[HBDPXMLParserHell alloc] init];
+		[parser loadWithBingMarket:HBDPBingRegionToMarket(region) completion:^(NSString *copyright, NSURL *url, NSError *error) {
+			if (error) {
+				NSLog(@"dailypaper: failed to load metadata: %@", error);
+			}
+
+			[@{
+				kHBDPDescriptionKey: error ? @"Couldn’t load the wallpaper details." : copyright,
+				kHBDPURLKey: url ? url.absoluteString : @"https://www.bing.com/"
+			} writeToFile:kHBDPMetadataPath atomically:YES];
+		}];
+	});
 }
 
 #pragma mark - Scheduling
