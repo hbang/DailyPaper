@@ -1,3 +1,7 @@
+THEOS_PACKAGE_DIR_NAME = debs
+TARGET =: clang
+ARCHS = armv7 armv7s arm64
+
 include theos/makefiles/common.mk
 
 TWEAK_NAME = DailyPaper
@@ -14,5 +18,5 @@ after-install::
 ifeq ($(RESPRING),0)
 	install.exec "killall Preferences; sleep 0.2; sbopenurl 'prefs:root=Tweaks&path=DailyPaper'"
 else
-	install.exec spring
+	install.exec "killall -9 backboardd"
 endif

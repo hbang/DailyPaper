@@ -3,7 +3,7 @@
 #import <Foundation/NSDistributedNotificationCenter.h>
 #import <SpringBoard/SBTodayBulletinCell.h>
 
-static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.f;
+static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.0;
 
 @implementation HBDPWidgetViewController {
 	UIButton *_copyrightButton;
@@ -13,7 +13,7 @@ static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.f;
 #pragma mark - Constants
 
 - (CGSize)preferredViewSize {
-	return CGSizeMake(0, (kHBDPWidgetViewControllerHorizontalMargin * 2) + ([@"X" sizeWithAttributes:[%c(SBTodayBulletinCell) defaultTextAttributes]].height * 6));
+	return CGSizeMake(0, (kHBDPWidgetViewControllerHorizontalMargin * 2.0) + ([@"X" sizeWithAttributes:[%c(SBTodayBulletinCell) defaultTextAttributes]].height * 6.0));
 }
 
 #pragma mark - UIViewController
@@ -22,12 +22,12 @@ static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.f;
 	[super loadView];
 
 	_copyrightButton = [[UIButton buttonWithType:UIButtonTypeSystem] retain];
-	_copyrightButton.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+	_copyrightButton.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
 	_copyrightButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_copyrightButton.titleLabel.numberOfLines = 6;
 	_copyrightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 	_copyrightButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
-	_copyrightButton.contentEdgeInsets = UIEdgeInsetsMake(kHBDPWidgetViewControllerHorizontalMargin, 48.f, kHBDPWidgetViewControllerHorizontalMargin, 15.f);
+	_copyrightButton.contentEdgeInsets = UIEdgeInsetsMake(kHBDPWidgetViewControllerHorizontalMargin, 48.0, kHBDPWidgetViewControllerHorizontalMargin, 15.f);
 	_copyrightButton.userInteractionEnabled = NO;
 	[_copyrightButton addTarget:self action:@selector(copyrightButtonTapped) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_copyrightButton];

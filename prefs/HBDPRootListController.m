@@ -41,12 +41,12 @@ static NSString *const kHBDPUpdateNowIdentifier = @"UpdateNow";
 - (void)forceUpdate:(PSSpecifier *)sender {
 	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("ws.hbang.dailypaper/ForceUpdate"), NULL, NULL, YES);
 
-	PSTableCell *cell = (PSTableCell *)[self.view cellForRowAtIndexPath:[self indexPathForSpecifier:sender]];
+	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:sender]];
 	cell.cellEnabled = NO;
 }
 
 - (void)wallpaperDidUpdate:(NSNotification *)notification {
-	PSTableCell *cell = (PSTableCell *)[self.view cellForRowAtIndexPath:[self indexPathForSpecifier:[self specifierForID:kHBDPUpdateNowIdentifier]]]; // ...why.
+	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:[self specifierForID:kHBDPUpdateNowIdentifier]]]; // ...why.
 	cell.cellEnabled = YES;
 
 	NSError *error = notification.userInfo[kHBDPErrorKey];

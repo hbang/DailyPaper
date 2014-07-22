@@ -29,6 +29,7 @@
 		_parser.delegate = self;
 		[_parser parse];
 	});
+
 }
 
 #pragma mark - NSXMLParserDelegate

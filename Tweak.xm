@@ -1,7 +1,6 @@
 #import "Global.h"
 #import "HBDPXMLParserHell.h"
-#include <substrate.h> // what.
-#include <notify.h>
+
 #import <Foundation/NSDistributedNotificationCenter.h>
 #import <PersistentConnection/PCPersistentTimer.h>
 #import <PhotoLibrary/PLStaticWallpaperImageViewController.h>
@@ -27,6 +26,7 @@ BOOL isRunning, isWaitingForWiFi, isFirstRun;
 @end
 
 void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
+
 	if (isRunning) {
 		completion([NSError errorWithDomain:HBDPErrorDomain code:2 userInfo:@{ NSLocalizedDescriptionKey: @"A wallpaper update is already running." }]);
 		return;
@@ -62,7 +62,7 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 
 		CGSize screenSize = [SBFWallpaperParallaxSettings minimumWallpaperSizeForCurrentDevice];
 
-		if (useRetina && [UIScreen mainScreen].scale > 1.f) {
+		if (useRetina && [UIScreen mainScreen].scale > 1.0) {
 			screenSize.width *= [UIScreen mainScreen].scale;
 			screenSize.height *= [UIScreen mainScreen].scale;
 		}
@@ -91,7 +91,6 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 	});
 
 	HBDPUpdateWallpaperMetadata();
-}
 
 void HBDPUpdateWallpaperOnDemand() {
 	HBDPUpdateWallpaper(^(NSError *error) {

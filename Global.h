@@ -1,4 +1,7 @@
+#import <UIKit/UIKit.h>
 #include <sys/cdefs.h>
+#include <substrate.h> // what.
+#include <notify.h>
 
 typedef NS_ENUM(NSUInteger, HBDPBingRegion) {
 	HBDPBingRegionWorldwide,
@@ -29,6 +32,11 @@ static NSString *const kHBDPWallpaperModeKey = @"WallpaperMode";
 
 static NSString *const kHBDPDescriptionKey = @"Description";
 static NSString *const kHBDPURLKey = @"URL";
+
+#define GET_BOOL(key, default) (prefs[key] ? ((NSNumber *)prefs[key]).boolValue : default)
+#define GET_FLOAT(key, default) (prefs[key] ? ((NSNumber *)prefs[key]).floatValue : default)
+#define GET_INT(key, default) (prefs[key] ? ((NSNumber *)prefs[key]).intValue : default)
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 #ifndef DAILYPAPER_GLOBAL_M
 __BEGIN_DECLS

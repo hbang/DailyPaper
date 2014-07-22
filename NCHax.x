@@ -1,3 +1,4 @@
+#import <UIKit/UIKit.h>
 #import <BulletinBoard/BBSectionInfo.h>
 #import <UIKit/UIImage+Private.h>
 
@@ -41,8 +42,6 @@ BOOL isDailyPaper = NO;
 
 - (NSArray *)_copyDefaultEnabledWidgetIDs {
 	NSArray *defaultWidgets = %orig;
-	[defaultWidgets release];
-
 	return [[defaultWidgets arrayByAddingObject:kHBDPWeeAppIdentifier] copy];
 }
 
