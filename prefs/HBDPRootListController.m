@@ -21,7 +21,7 @@ static NSString *const kHBDPSaveWallpaperIdentifier = @"SaveWallpaper";
 }
 
 + (UIColor *)hb_tintColor {
-	return [UIColor colorWithRed:215.f / 255.f green:170.f / 255.f blue:0 alpha:1];
+	return [UIColor colorWithRed:241.f / 255.f green:148.f / 255.f blue:0 alpha:1];
 }
 
 #pragma mark - UIViewController
