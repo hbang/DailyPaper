@@ -12,21 +12,47 @@
 			<key>footerText</key>
 			<string>© 2013—2014, HASHBANG Productions</string>
 			<key>label</key>
-			<string>DailyPaper 1.0 Beta 1</string>
+			<string>DailyPaper 1.0</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Developers</string>
 		</dict>
 		<dict>
-			<key>action</key>
-			<string>hb_openWebsite</string>
-			<key>cell</key>
-			<string>PSButtonCell</string>
 			<key>cellClass</key>
-			<string>HBTintedTableCell</string>
+			<string>HBTwitterCell</string>
 			<key>label</key>
-			<string>Visit Website</string>
+			<string>Adam D</string>
+			<key>user</key>
+			<string>thekirbylover</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
+			<key>label</key>
+			<string>Julian Weiss</string>
+			<key>user</key>
+			<string>insanj</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Icon</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
+			<key>label</key>
+			<string>Jason Kesler</string>
+			<key>user</key>
+			<string>k3levs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
 		</dict>
 		<dict>
 			<key>cell</key>
