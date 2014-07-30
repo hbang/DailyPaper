@@ -3,7 +3,7 @@
 #import <Foundation/NSDistributedNotificationCenter.h>
 #import <SpringBoard/SBTodayBulletinCell.h>
 
-static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.0;
+static CGFloat const kHBDPWidgetViewControllerVerticalMargin = 10.0;
 
 @implementation HBDPWidgetViewController {
 	UIButton *_copyrightButton;
@@ -13,7 +13,7 @@ static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.0;
 #pragma mark - Constants
 
 - (CGSize)preferredViewSize {
-	return CGSizeMake(0, (kHBDPWidgetViewControllerHorizontalMargin * 2.0) + ([@"X" sizeWithAttributes:[%c(SBTodayBulletinCell) defaultTextAttributes]].height * 5.0));
+	return CGSizeMake(0, (kHBDPWidgetViewControllerVerticalMargin * 2.0) + ([@"X" sizeWithAttributes:[%c(SBTodayBulletinCell) defaultTextAttributes]].height * 5.0));
 }
 
 #pragma mark - UIViewController
@@ -27,7 +27,7 @@ static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.0;
 	_copyrightButton.titleLabel.numberOfLines = 6;
 	_copyrightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 	_copyrightButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
-	_copyrightButton.contentEdgeInsets = UIEdgeInsetsMake(kHBDPWidgetViewControllerHorizontalMargin, 48.0, kHBDPWidgetViewControllerHorizontalMargin, 15.f);
+	_copyrightButton.contentEdgeInsets = UIEdgeInsetsMake(kHBDPWidgetViewControllerVerticalMargin, 48.0, kHBDPWidgetViewControllerVerticalMargin, 15.f);
 	_copyrightButton.userInteractionEnabled = NO;
 	[_copyrightButton addTarget:self action:@selector(copyrightButtonTapped) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:_copyrightButton];
