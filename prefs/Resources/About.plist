@@ -53,10 +53,6 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
 			<key>footerText</key>
 			<string>Experiencing issues? Send us an email and we’ll help you.</string>
 		</dict>
