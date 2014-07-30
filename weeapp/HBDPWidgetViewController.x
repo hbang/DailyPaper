@@ -13,7 +13,7 @@ static CGFloat const kHBDPWidgetViewControllerHorizontalMargin = 10.0;
 #pragma mark - Constants
 
 - (CGSize)preferredViewSize {
-	return CGSizeMake(0, (kHBDPWidgetViewControllerHorizontalMargin * 2.0) + ([@"X" sizeWithAttributes:[%c(SBTodayBulletinCell) defaultTextAttributes]].height * 6.0));
+	return CGSizeMake(0, (kHBDPWidgetViewControllerHorizontalMargin * 2.0) + ([@"X" sizeWithAttributes:[%c(SBTodayBulletinCell) defaultTextAttributes]].height * 5.0));
 }
 
 #pragma mark - UIViewController
