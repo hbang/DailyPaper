@@ -218,6 +218,24 @@ DailyPaper downloads a new wallpaper from Bing every day at midnight in the regi
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Downloads and saves the current wallpaper to your camera roll in full quality (1366×768).</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>saveWallpaper:</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>cellClass</key>
+			<string>HBDPSpinnerTableCell</string>
+			<key>id</key>
+			<string>SaveWallpaper</string>
+			<key>label</key>
+			<string>Save to Camera Roll</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
 		</dict>
 		<dict>
 			<key>cell</key>

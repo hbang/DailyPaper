@@ -25,8 +25,29 @@ BOOL isRunning, isWaitingForWiFi, isFirstRun;
 
 @end
 
-void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
+UIImage *HBDPRetrieveWallpaperWithSize(CGSize screenSize, NSError **error) {
+	if (CGSizeEqualToSize(screenSize, CGSizeZero)) {
+		screenSize = [SBFWallpaperParallaxSettings minimumWallpaperSizeForCurrentDevice];
 
+		if (useRetina && [UIScreen mainScreen].scale > 1.0) {
+			screenSize.width *= [UIScreen mainScreen].scale;
+			screenSize.height *= [UIScreen mainScreen].scale;
+		}
+	}
+
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.bing.com/ImageResolution.aspx?w=%li&h=%li&mkt=%@", (long)screenSize.width, (long)screenSize.height, HBDPBingRegionToMarket(region)]];
+	NSError *requestError = nil;
+	NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url] returningResponse:nil error:&requestError];
+
+	if (requestError) {
+		*error = requestError;
+		return nil;
+	} else {
+		return [UIImage imageWithData:data];
+	}
+}
+
+void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 	if (isRunning) {
 		completion([NSError errorWithDomain:HBDPErrorDomain code:2 userInfo:@{ NSLocalizedDescriptionKey: @"A wallpaper update is already running." }]);
 		return;
@@ -60,16 +81,8 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		isRunning = YES;
 
-		CGSize screenSize = [SBFWallpaperParallaxSettings minimumWallpaperSizeForCurrentDevice];
-
-		if (useRetina && [UIScreen mainScreen].scale > 1.0) {
-			screenSize.width *= [UIScreen mainScreen].scale;
-			screenSize.height *= [UIScreen mainScreen].scale;
-		}
-
-		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.bing.com/ImageResolution.aspx?w=%li&h=%li&mkt=%@", (long)screenSize.width, (long)screenSize.height, HBDPBingRegionToMarket(region)]];
 		NSError *error = nil;
-		NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url] returningResponse:nil error:&error];
+		UIImage *image = HBDPRetrieveWallpaperWithSize(CGSizeZero, &error);
 
 		if (error) {
 			completion(error);
@@ -77,7 +90,7 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 			return;
 		}
 
-		PLStaticWallpaperImageViewController *wallpaperViewController = [[[PLStaticWallpaperImageViewController alloc] initWithUIImage:[UIImage imageWithData:data]] autorelease];
+		PLStaticWallpaperImageViewController *wallpaperViewController = [[[PLStaticWallpaperImageViewController alloc] initWithUIImage:image] autorelease];
 		wallpaperViewController.saveWallpaperData = YES;
 
 		uintptr_t address = (uintptr_t)&wallpaperMode;
@@ -114,6 +127,19 @@ void HBDPUpdateWallpaperMetadata() {
 				kHBDPURLKey: url ? url.absoluteString : @"https://www.bing.com/"
 			} writeToFile:kHBDPMetadataPath atomically:YES];
 		}];
+	});
+}
+
+void HBDPSaveWallpaper() {
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		NSError *error = nil;
+		UIImage *image = HBDPRetrieveWallpaperWithSize(CGSizeMake(1366.f, 768.f), &error);
+
+		if (!error) {
+			UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+		}
+
+		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:HBDPWallpaperDidSaveNotification object:nil userInfo:error ? @{ kHBDPErrorKey: error.localizedDescription } : nil];
 	});
 }
 
@@ -225,4 +251,5 @@ void HBDPLoadPrefs() {
 
 	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)HBDPLoadPrefs, CFSTR("ws.hbang.dailypaper/ReloadPrefs"), NULL, kNilOptions);
 	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)HBDPUpdateWallpaperOnDemand, CFSTR("ws.hbang.dailypaper/ForceUpdate"), NULL, kNilOptions);
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)HBDPSaveWallpaper, CFSTR("ws.hbang.dailypaper/SaveWallpaper"), NULL, kNilOptions);
 }

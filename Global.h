@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, HBDPBingRegion) {
 };
 
 static NSString *const HBDPWallpaperDidUpdateNotification = @"HBDPWallpaperDidUpdateNotification";
-static NSString *const HBDPWallpaperMetadataDidUpdateNotification = @"HBDPWallpaperMetadataDidUpdateNotification";
+static NSString *const HBDPWallpaperDidSaveNotification = @"HBDPWallpaperDidSaveNotification";
 
 static NSString *const kHBDPErrorKey = @"error";
 

@@ -6,6 +6,7 @@
 #include <notify.h>
 
 static NSString *const kHBDPUpdateNowIdentifier = @"UpdateNow";
+static NSString *const kHBDPSaveWallpaperIdentifier = @"SaveWallpaper";
 
 @implementation HBDPRootListController
 
@@ -30,29 +31,49 @@ static NSString *const kHBDPUpdateNowIdentifier = @"UpdateNow";
 
 	if (self) {
 		_specifiers = [[self loadSpecifiersFromPlistName:@"Root" target:self] retain];
+
 		[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(wallpaperDidUpdate:) name:HBDPWallpaperDidUpdateNotification object:nil];
+		[[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(wallpaperDidSave:) name:HBDPWallpaperDidSaveNotification object:nil];
 	}
 
 	return self;
 }
 
-#pragma mark - Callbacks
+#pragma mark - Actions
+
+// TODO: this feels really ugly :(
 
 - (void)forceUpdate:(PSSpecifier *)sender {
-	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("ws.hbang.dailypaper/ForceUpdate"), NULL, NULL, YES);
+	[self _postNotification:CFSTR("ws.hbang.dailypaper/ForceUpdate") forSpecifier:sender];
+}
 
-	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:sender]];
+- (void)saveWallpaper:(PSSpecifier *)sender {
+	[self _postNotification:CFSTR("ws.hbang.dailypaper/SaveWallpaper") forSpecifier:sender];
+}
+
+- (void)_postNotification:(CFStringRef)notification forSpecifier:(PSSpecifier *)specifier {
+	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), notification, NULL, NULL, YES);
+
+	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:specifier]];
 	cell.cellEnabled = NO;
 }
 
+#pragma mark - Callbacks
+
 - (void)wallpaperDidUpdate:(NSNotification *)notification {
-	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:[self specifierForID:kHBDPUpdateNowIdentifier]]]; // ...why.
+	[self _callbackReturnedWithError:notification.userInfo[kHBDPErrorKey] forIdentifier:kHBDPUpdateNowIdentifier];
+}
+
+- (void)wallpaperDidSave:(NSNotification *)notification {
+	[self _callbackReturnedWithError:notification.userInfo[kHBDPErrorKey] forIdentifier:kHBDPSaveWallpaperIdentifier];
+}
+
+- (void)_callbackReturnedWithError:(NSError *)error forIdentifier:(NSString *)identifier {
+	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:[self specifierForID:identifier]]]; // ...why.
 	cell.cellEnabled = YES;
 
-	NSError *error = notification.userInfo[kHBDPErrorKey];
-
 	if (error) {
-		UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Couldn’t update your wallpaper because an error occurred." message:[NSString stringWithFormat:@"%@\nMake sure you’re connected to the Internet and try again in a few minutes.", notification.userInfo[kHBDPErrorKey]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+		UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Couldn’t download your wallpaper because an error occurred." message:[NSString stringWithFormat:@"%@\nMake sure you’re connected to the Internet and try again in a few minutes.", error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
 		[alertView performSelector:@selector(show) withObject:nil afterDelay:0.1];
 	}
 }

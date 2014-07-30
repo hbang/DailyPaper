@@ -6,7 +6,7 @@ include theos/makefiles/common.mk
 
 TWEAK_NAME = DailyPaper
 DailyPaper_FILES = $(wildcard *.m) Tweak.xm NCHax.x
-DailyPaper_FRAMEWORKS = UIKit
+DailyPaper_FRAMEWORKS = UIKit CoreGraphics
 DailyPaper_PRIVATE_FRAMEWORKS = PersistentConnection PhotoLibrary SpringBoardFoundation
 
 include $(THEOS_MAKE_PATH)/tweak.mk
