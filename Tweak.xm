@@ -91,6 +91,7 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 	});
 
 	HBDPUpdateWallpaperMetadata();
+}
 
 void HBDPUpdateWallpaperOnDemand() {
 	HBDPUpdateWallpaper(^(NSError *error) {
