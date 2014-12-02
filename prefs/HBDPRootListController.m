@@ -54,7 +54,7 @@ static NSString *const kHBDPSaveWallpaperIdentifier = @"SaveWallpaper";
 - (void)_postNotification:(CFStringRef)notification forSpecifier:(PSSpecifier *)specifier {
 	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), notification, NULL, NULL, YES);
 
-	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:specifier]];
+	PSTableCell *cell = (PSTableCell *)[(UITableView *)[self table] cellForRowAtIndexPath:[self indexPathForSpecifier:specifier]];
 	cell.cellEnabled = NO;
 }
 
@@ -69,7 +69,7 @@ static NSString *const kHBDPSaveWallpaperIdentifier = @"SaveWallpaper";
 }
 
 - (void)_callbackReturnedWithError:(NSError *)error forIdentifier:(NSString *)identifier {
-	PSTableCell *cell = (PSTableCell *)[(UITableView *)self.view cellForRowAtIndexPath:[self indexPathForSpecifier:[self specifierForID:identifier]]]; // ...why.
+	PSTableCell *cell = (PSTableCell *)[[self table] cellForRowAtIndexPath:[self indexPathForSpecifier:[self specifierForID:identifier]]]; // ...why.
 	cell.cellEnabled = YES;
 
 	if (error) {
