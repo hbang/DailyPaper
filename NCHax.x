@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <BulletinBoard/BBSectionInfo.h>
 #import <UIKit/UIImage+Private.h>
+#import <version.h>
 
 static NSString *const kHBDPWeeAppIdentifier = @"ws.hbang.dailypaperweeapp";
 
@@ -46,3 +47,11 @@ BOOL isDailyPaper = NO;
 }
 
 %end
+
+#pragma mark - Constructor
+
+%ctor {
+	if (!IS_IOS_OR_NEWER(iOS_8_0)) {
+		%init;
+	}
+}
