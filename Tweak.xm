@@ -108,7 +108,9 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 
 void HBDPUpdateWallpaperOnDemand() {
 	HBDPUpdateWallpaper(^(NSError *error) {
-		HBLogError(@"wallpaper update error: %@", error);
+		if (error) {
+			HBLogError(@"wallpaper update error: %@", error);
+		}
 
 		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:HBDPWallpaperDidUpdateNotification object:nil userInfo:error ? @{ kHBDPErrorKey: error.localizedDescription } : nil];
 	}, YES);
