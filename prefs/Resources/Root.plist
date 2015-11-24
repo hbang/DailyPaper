@@ -20,7 +20,7 @@
 			<key>key</key>
 			<string>Enabled</string>
 			<key>label</key>
-			<string>Enabled</string>
+			<string>ENABLED</string>
 			<key>PostNotification</key>
 			<string>ws.hbang.dailypaper/ReloadPrefs</string>
 		</dict>
@@ -209,7 +209,7 @@ DailyPaper downloads a new wallpaper from Bing every day at midnight in the regi
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
-			<string>HBDPSpinnerTableCell</string>
+			<string>HBSpinnerTableCell</string>
 			<key>id</key>
 			<string>UpdateNow</string>
 			<key>label</key>
@@ -227,7 +227,7 @@ DailyPaper downloads a new wallpaper from Bing every day at midnight in the regi
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>cellClass</key>
-			<string>HBDPSpinnerTableCell</string>
+			<string>HBSpinnerTableCell</string>
 			<key>id</key>
 			<string>SaveWallpaper</string>
 			<key>label</key>
@@ -245,7 +245,7 @@ DailyPaper downloads a new wallpaper from Bing every day at midnight in the regi
 			<key>isController</key>
 			<true/>
 			<key>label</key>
-			<string>About</string>
+			<string>ABOUT</string>
 		</dict>
 	</array>
 	<key>title</key>

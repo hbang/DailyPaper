@@ -54,7 +54,7 @@ static NSString *const kHBDPSaveWallpaperIdentifier = @"SaveWallpaper";
 - (void)_postNotification:(CFStringRef)notification forSpecifier:(PSSpecifier *)specifier {
 	CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), notification, NULL, NULL, YES);
 
-	PSTableCell *cell = (PSTableCell *)[(UITableView *)[self table] cellForRowAtIndexPath:[self indexPathForSpecifier:specifier]];
+	PSTableCell *cell = [self cachedCellForSpecifier:specifier];
 	cell.cellEnabled = NO;
 }
 
@@ -69,11 +69,11 @@ static NSString *const kHBDPSaveWallpaperIdentifier = @"SaveWallpaper";
 }
 
 - (void)_callbackReturnedWithError:(NSError *)error forIdentifier:(NSString *)identifier {
-	PSTableCell *cell = (PSTableCell *)[[self table] cellForRowAtIndexPath:[self indexPathForSpecifier:[self specifierForID:identifier]]]; // ...why.
+	PSTableCell *cell = [self cachedCellForSpecifierID:identifier];
 	cell.cellEnabled = YES;
 
 	if (error) {
-		UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Couldn’t download your wallpaper because an error occurred." message:[NSString stringWithFormat:@"%@\nMake sure you’re connected to the Internet and try again in a few minutes.", error] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+		UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Couldn’t download your wallpaper because an error occurred." message:[NSString stringWithFormat:@"%@\nMake sure you’re connected to the Internet and try again in a few minutes.", error.localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
 		[alertView performSelector:@selector(show) withObject:nil afterDelay:0.1];
 	}
 }

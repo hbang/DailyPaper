@@ -108,7 +108,7 @@ void HBDPUpdateWallpaper(void(^completion)(NSError *error), BOOL onDemand) {
 
 void HBDPUpdateWallpaperOnDemand() {
 	HBDPUpdateWallpaper(^(NSError *error) {
-		NSLog(@"dailypaper: wallpaper update error: %@", error);
+		HBLogError(@"wallpaper update error: %@", error);
 
 		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:HBDPWallpaperDidUpdateNotification object:nil userInfo:error ? @{ kHBDPErrorKey: error.localizedDescription } : nil];
 	}, YES);
@@ -119,7 +119,7 @@ void HBDPUpdateWallpaperMetadata() {
 		HBDPXMLParserHell *parser = [[HBDPXMLParserHell alloc] init];
 		[parser loadWithBingMarket:HBDPBingRegionToMarket(region) completion:^(NSString *copyright, NSURL *url, NSError *error) {
 			if (error) {
-				NSLog(@"dailypaper: failed to load metadata: %@", error);
+				HBLogError(@"failed to load metadata: %@", error);
 			}
 
 			[@{
@@ -161,17 +161,17 @@ void HBDPSaveWallpaper() {
 	dateComponents.hour = 0;
 	dateComponents.minute = arc4random_uniform(3); // let's not ddos bing
 	dateComponents.second = arc4random_uniform(61);
-	NSLog(@"dailypaper: scheduling next update for %@", [calendar dateFromComponents:dateComponents]);
+	HBLogDebug(@"scheduling next update for %@", [calendar dateFromComponents:dateComponents]);
 
 	PCPersistentTimer *timer = [[[PCPersistentTimer alloc] initWithFireDate:[calendar dateFromComponents:dateComponents] serviceIdentifier:@"ws.hbang.dailypaper" target:self selector:@selector(_dailypaper_updateWallpaper) userInfo:nil] autorelease];
 	[timer scheduleInRunLoop:[NSRunLoop mainRunLoop]];
 }
 
 %new - (void)_dailypaper_updateWallpaper {
-	NSLog(@"dailypaper: update!");
+	HBLogDebug(@"update!");
 
 	HBDPUpdateWallpaper(^(NSError *error) {
-		NSLog(@"dailypaper: wallpaper update error: %@", error);
+		HBLogError(@"wallpaper update error: %@", error);
 	}, NO);
 }
 

@@ -1,13 +1,11 @@
-ARCHS = armv7 arm64
-
-include theos/makefiles/common.mk
+include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = DailyPaper
 DailyPaper_FILES = $(wildcard *.m)
 DailyPaper_INSTALL_PATH = /Library/PreferenceBundles
 DailyPaper_FRAMEWORKS = UIKit
 DailyPaper_PRIVATE_FRAMEWORKS = Preferences
-DailyPaper_LIBRARIES = hbangprefs
+DailyPaper_EXTRA_FRAMEWORKS = CepheiPrefs
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 

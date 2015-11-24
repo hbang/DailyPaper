@@ -1,10 +1,21 @@
-{
-	entry = {
-		bundle = DailyPaper;
-		cell = PSLinkCell;
-		detail = HBDPRootListController;
-		icon = icon.png;
-		isController = 1;
-		label = DailyPaper;
-	};
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>entry</key>
+	<dict>
+		<key>bundle</key>
+		<string>DailyPaper</string>
+		<key>cell</key>
+		<string>PSLinkCell</string>
+		<key>detail</key>
+		<string>HBDPRootListController</string>
+		<key>icon</key>
+		<string>icon.png</string>
+		<key>isController</key>
+		<true/>
+		<key>label</key>
+		<string>DailyPaper</string>
+	</dict>
+</dict>
+</plist>
